@@ -17,4 +17,5 @@ export const Center = styled.div`
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 30px;
+    width: 600px;
 `
