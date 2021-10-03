@@ -1,6 +1,11 @@
 import styled from "styled-components"
-import { IProps } from "./"
-export const StyledButton  = styled.button<IProps>`
+
+interface IProps {
+    width?: string
+    height?: string
+}
+
+const Button  = styled.button<IProps>`
     background-color: ${ (props) => props.theme.color.blue};
     border: none;
     border-radius: 53px;
@@ -13,3 +18,5 @@ export const StyledButton  = styled.button<IProps>`
     width: ${(props) => props.width || "105px"};
     height: ${(props) => props.height || "39px"};
 `
+
+export default Button
