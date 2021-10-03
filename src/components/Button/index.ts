@@ -3,6 +3,7 @@ import styled from "styled-components"
 interface IProps {
     width?: string
     height?: string
+    isDisabled?: boolean
 }
 
 const Button  = styled.button<IProps>`
@@ -17,6 +18,8 @@ const Button  = styled.button<IProps>`
     color: #fff;
     width: ${(props) => props.width || "105px"};
     height: ${(props) => props.height || "39px"};
+    opacity: ${ (props) => props.isDisabled ? 0.3 : 1 };
+    pointer-events: ${ (props) => props.isDisabled ? 'none' : 'all' };
 `
 
 export default Button
