@@ -43,7 +43,7 @@ export const RightContainer = styled.div`
         margin-top: 26px;
     }
     span {
-        color: blue;
+        color: ${ (props) => props.theme.color.blue};
         cursor: pointer;
     }
 `
