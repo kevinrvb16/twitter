@@ -2,12 +2,12 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     display: flex;
-
     `
 
 export const BackgroundContainer = styled.div`
 img { 
-    height: 100vh;
+    height: 100%;
+    width: 100%;
     object-fit: cover;
 }
 `
@@ -15,7 +15,7 @@ export const RightContainer = styled.div`
     margin-left: 30px;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     justify-content: center;
     h1 {
         margin-top: 60px;
