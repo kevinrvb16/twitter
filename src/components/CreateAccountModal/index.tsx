@@ -27,8 +27,15 @@ const CreateAccountModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
       toast.error(validation)
     }
   };
+
+  const onClose = () => {
+    setName('')
+    setUsername('')
+    setEmail('')
+    setPassword('')
+  }
   return (
-    <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+    <Modal isOpen={isOpen} setIsOpen={setIsOpen} onClose={onClose}>
       <CenterImage>
         <FaTwitter color="#d9d9d9" size={28} />
       </CenterImage>
