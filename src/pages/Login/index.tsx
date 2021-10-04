@@ -3,6 +3,7 @@ import Background from '../../assets/images/login-bg.png'
 import {FaTwitter} from 'react-icons/fa'
 import { useState } from 'react'
 import CreateAccountModal from '../../components/CreateAccountModal'
+import LoginModal from '../../components/LoginModal'
 
 const Login: React.FC = () => {
     const [isCreateAccountModalOpen, setIsCreateAccountModalOpen] = useState(false)
@@ -11,6 +12,7 @@ const Login: React.FC = () => {
     return (
         <Container>
             <CreateAccountModal isOpen={isCreateAccountModalOpen} setIsOpen={setIsCreateAccountModalOpen}/>
+            <LoginModal  isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
             <BackgroundContainer>
                 <img src={Background} alt="Fundo do Twitter" />
             </BackgroundContainer>
@@ -20,7 +22,7 @@ const Login: React.FC = () => {
                 <h2>Inscreva-se no Twitter hoje mesmo.</h2>
                 <Button onClick={ () => setIsCreateAccountModalOpen(true)}>Escreva-se com email</Button>
                 <p> Já tem uma conta? {' '}
-                    <span>
+                    <span onClick={ () => setIsLoginModalOpen(true)}>
                          Entre
                     </span>
                 </p>
