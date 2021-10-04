@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState } from "react"
 import { useHistory } from "react-router-dom"
-import { FaTwitter } from "react-icons/fa";
-import { toast } from "react-toastify";
-import Input from "../../Input";
-import { api } from "../../services/api";
-import validateLoginFields from "../../utils/validateLoginFields";
-import Button from "../Button";
-import Modal from "../Modal";
-import { CenterImage, InputContainer, Title } from "./styles";
+import { FaTwitter } from "react-icons/fa"
+import { toast } from "react-toastify"
+import Input from "../../Input"
+import { api } from "../../services/api"
+import validateLoginFields from "../../utils/validateLoginFields"
+import Button from "../Button"
+import Modal from "../Modal"
+import { CenterImage, InputContainer, Title } from "./styles"
+import { useGlobalState } from "../../context/GlobalContext"
 
 interface IProps {
   isOpen: boolean;
@@ -15,11 +16,11 @@ interface IProps {
 }
 
 const LoginModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const history = useHistory();
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
+  const {setAuth} = useGlobalState()
+  const history = useHistory()
   const isDisabled =
     email === "" || password === "" || loading;
 
@@ -81,4 +82,4 @@ const LoginModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
     </Modal>
   );
 };
-export default LoginModal;
+export default LoginModal

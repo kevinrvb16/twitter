@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 interface IAuth {
     "access_token": string
@@ -27,4 +27,9 @@ export const GlobalStateProvider: React.FC = ({ children }) => {
             {children}
         </GlobalContext.Provider>
     )
+}
+
+export const useGlobalState = () => {
+    const context = useContext(GlobalContext)
+     return context
 }
