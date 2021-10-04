@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaTwitter } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Input from "../../Input";
+import { api } from "../../services/api";
 import validateCreateAccountFields from "../../utils/validateCreateAccountFields";
 import Button from "../Button";
 import Modal from "../Modal";
@@ -26,6 +27,20 @@ const CreateAccountModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
     if(typeof validation === "string"){
       toast.error(validation)
     }
+
+    //chamar a API
+    try {
+      await api.post('/users', {
+        name,
+        username,
+        email,
+        password
+      })
+      toast.success("Conta criada com sucesso!")
+      onClose()
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Não foi possível criar a conta!")
+    }
   };
 
   const onClose = () => {
@@ -33,6 +48,7 @@ const CreateAccountModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
     setUsername('')
     setEmail('')
     setPassword('')
+    setIsOpen(false)
   }
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} onClose={onClose}>
