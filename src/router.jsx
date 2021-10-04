@@ -1,31 +1,30 @@
-import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-
-import Home from './pages/Home'
-import Login from './pages/Login';
-import { GlobalStyles } from './styles/GlobalStyles';
-import ThemeProvider from './styles/ThemeProvider';
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { GlobalStateProvider } from "./context/GlobalContext";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import { GlobalStyles } from "./styles/GlobalStyles";
+import ThemeProvider from "./styles/ThemeProvider";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 const Routes = () => {
-    return(
-    <Router>
-        <GlobalStyles/>
-        <ToastContainer
-        newestOnTop={true}
-        theme="dark"
-        />
+  return (
+    <GlobalStateProvider>
+      <Router>
+        <GlobalStyles />
+        <ToastContainer newestOnTop={true} theme="dark" />
         <ThemeProvider>
-            <Switch>
-                <Route exact path="/">
-                    <Home />
-                </Route>
-                <Route path="/login">
-                    <Login />
-                </Route>
-            </Switch>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+          </Switch>
         </ThemeProvider>
-    </Router>
-    )
-}
+      </Router>
+    </GlobalStateProvider>
+  );
+};
 
 export default Routes;
