@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-interface IAuth {
+export interface IAuth {
     access_token: string
         user: {
             email: string
