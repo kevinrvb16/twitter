@@ -17,5 +17,15 @@ apiWithAuth.interceptors.request.use(function (config) {
         config.headers['Authorization'] = `Bearer ${parsedAuth.access_token}`
     }
     return config;
-  }
-)
+  })
+
+apiWithAuth.interceptors.response.use(function (response) {
+    return response;
+  }, function (error) {
+    if (error?.response?.status === 401) {
+        localStorage.removeItem('@twitter:auth')
+        window.location.href = '/login'
+    }
+
+    return Promise.reject(error);
+  });
