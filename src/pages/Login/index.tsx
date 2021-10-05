@@ -23,7 +23,7 @@ const Login: React.FC = () => {
                 <Button onClick={ () => setIsCreateAccountModalOpen(true)}>Escreva-se com email</Button>
                 <p> Já tem uma conta? {' '}
                     <span onClick={ () => setIsLoginModalOpen(true)}>
-                         Entre
+                        Entre
                     </span>
                 </p>
             </RightContainer>

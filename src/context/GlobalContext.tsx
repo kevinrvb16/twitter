@@ -1,11 +1,12 @@
 import { createContext, useContext, useState } from "react";
 
 interface IAuth {
-    "access_token": string
-        "user": {
-          "id": string
-          "name": string
-          "email": string
+    access_token: string
+        user: {
+          id: string
+          name: string
+          username: string
+          email: string
         }
 }
 
@@ -18,7 +19,6 @@ interface IGlobalState {
 const GlobalContext = createContext<IGlobalState>({} as IGlobalState)
 
 export const GlobalStateProvider: React.FC = ({ children }) => {
-
     const [auth, setAuth] = useState<IAuth>()
 
     const removeAuth = () => setAuth(undefined)

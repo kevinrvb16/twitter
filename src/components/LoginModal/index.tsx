@@ -1,49 +1,52 @@
-import { useState } from "react"
-import { useHistory } from "react-router-dom"
-import { FaTwitter } from "react-icons/fa"
-import { toast } from "react-toastify"
-import Input from "../../Input"
+import { useState } from "react";
+import { FaTwitter } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
+
 import { api } from "../../services/api"
 import validateLoginFields from "../../utils/validateLoginFields"
 import Button from "../Button"
+import Input from "../../Input";
 import Modal from "../Modal"
 import { CenterImage, InputContainer, Title } from "./styles"
 import { useGlobalState } from "../../context/GlobalContext"
 
 interface IProps {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+  isOpen: boolean
+  setIsOpen: (isOpen: boolean) => void
 }
 
 const LoginModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
-  const {setAuth} = useGlobalState()
-  const history = useHistory()
-  const isDisabled =
-    email === "" || password === "" || loading;
+  const { setAuth } = useGlobalState()
 
-   const createAccount = async () => {
-    const validation = validateLoginFields( email,
-      password)
-    if(typeof validation === "string"){
+  const history = useHistory()
+  const isDisabled = email === "" || password === "" || loading
+
+  const login = async () => {
+    const validation = validateLoginFields(email, password)
+
+    if (typeof validation === 'string') {
       toast.error(validation)
     }
 
     setLoading(true)
     try {
-      await api.post('/login', {
-        email,
-        password
-      })
+      const { data } = await api.post('/login', { email, password })
+
+      setAuth(data)
+
       history.push('/')
-      //onClose()
+
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Não foi possível efetuar login!")
+      toast.error(
+        error?.response?.data?.message || "Não foi possível efetuar login!"
+      )
     }
     setLoading(false)
-  };
+  }
 
   const onClose = () => {
     setEmail('')
@@ -75,11 +78,11 @@ const LoginModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
         isDisabled={isDisabled}
         height="47px"
         width="100%"
-        onClick={createAccount}
+        onClick={login}
       >
         Fazer login
       </Button>
     </Modal>
-  );
-};
+  )
+}
 export default LoginModal
