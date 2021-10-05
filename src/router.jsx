@@ -6,6 +6,7 @@ import { GlobalStyles } from "./styles/GlobalStyles";
 import ThemeProvider from "./styles/ThemeProvider";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import ProtectedRoute from "./components/ProtectedRoute";
 const Routes = () => {
   return (
     <GlobalStateProvider>
@@ -14,9 +15,9 @@ const Routes = () => {
         <ToastContainer newestOnTop={true} theme="dark" />
         <ThemeProvider>
           <Switch>
-            <Route exact path="/">
+            <ProtectedRoute exact path="/">
               <Home />
-            </Route>
+            </ProtectedRoute>
             <Route path="/login">
               <Login />
             </Route>
