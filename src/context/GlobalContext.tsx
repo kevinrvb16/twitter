@@ -34,7 +34,9 @@ export const GlobalStateProvider: React.FC = ({ children }) => {
         setAuthState(auth)
     }
 
-    const removeAuth = () => setAuthState(undefined)
+        const removeAuth = () => {
+            localStorage.removeItem("@twitter:auth")
+            setAuthState(undefined)}
     return (
         <GlobalContext.Provider value={{ auth, setAuth, removeAuth }}>
             {children}
