@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import { api } from "../../services/api"
 import validateLoginFields from "../../utils/validateLoginFields"
 import Button from "../Button"
-import Input from "../../Input";
+import Input from "../Input";
 import Modal from "../Modal"
 import { CenterImage, InputContainer, Title } from "./styles"
 import { useGlobalState } from "../../context/GlobalContext"

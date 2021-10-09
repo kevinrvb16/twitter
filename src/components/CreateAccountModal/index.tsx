@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaTwitter } from "react-icons/fa";
 import { toast } from "react-toastify";
-import Input from "../../Input";
+import Input from "../Input";
 import { api } from "../../services/api";
 import validateCreateAccountFields from "../../utils/validateCreateAccountFields";
 import Button from "../Button";
