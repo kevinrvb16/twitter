@@ -40,3 +40,29 @@ export const DropDown = styled.div`
     border-radius: 8px;
     padding: 20px;
 `
+export const UserNames = styled.div`
+    margin-left: 10px;
+    font-size:15px;
+    line-height: 18px;
+
+    h2{
+        color: ${props => props.theme.color.gray}
+    }
+    h1{
+        font-weight: 700;
+    }
+`
+export const UserContainer = styled.div`
+    display: flex;
+    align-items: center;
+    img {
+        border-radius: 50%;
+        width: 49px;
+        height: 49px;
+    }
+
+    &:not(:last-child) {
+        margin-bottom: 14px;
+    }
+
+`

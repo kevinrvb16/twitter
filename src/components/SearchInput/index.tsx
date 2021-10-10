@@ -1,4 +1,4 @@
-import { DropDown, Input, InputContainer } from "./styles"
+import { DropDown, Input, InputContainer, UserContainer, UserNames } from "./styles"
 import { FiSearch } from "react-icons/fi"
 import { useState } from "react"
 const SearchInput = () => {
@@ -9,8 +9,9 @@ const SearchInput = () => {
     }
 
     const mockUsers = [
-        { name: 'daniel', username: 'daniel' },
-        { name: 'Bruno', username: 'bruno' }
+        { name: 'daniel berg', username: 'daniel11' },
+        { name: 'Bruno Braga', username: 'bruno11' },
+        { name: 'Luã Alvaro', username: 'lulu' }
     ]
     const [isOnFocus, setIsOnFocus] = useState(false)
     const [users, setUsers] = useState<IUsers[]>(mockUsers)
@@ -23,11 +24,18 @@ const SearchInput = () => {
             {users && (
             <DropDown>
                 {users?.map((user, index)=> (
-                <h1 key={index}> {user.name}</h1>
-                ))}
-            </DropDown>
+                <UserContainer key={index}>
+                    <img src={`https://robohash.org/${user.username}`} alt={user.name} /> 
+                    <UserNames>
+                        <h1>{user.name}</h1>
+                        <h2>@{user.username}</h2>
+                    </UserNames>
+                </UserContainer>
+    ))
+}
+            </DropDown >
             )}
-        </InputContainer>
+        </InputContainer >
     )
 }
 
