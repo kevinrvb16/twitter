@@ -1,7 +1,7 @@
 import SideBar from "../../components/SideBar";
 
-function Home() {    
+function Perfil() {    
   return <SideBar/>
 }
 
-export default Home;
+export default Perfil;

@@ -18,6 +18,9 @@ const Routes = () => {
             <ProtectedRoute exact path="/">
               <Home />
             </ProtectedRoute>
+            <ProtectedRoute path="/perfil">
+              <Home />
+            </ProtectedRoute>
             <Route path="/login">
               <Login />
             </Route>
