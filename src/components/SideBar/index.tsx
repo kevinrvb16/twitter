@@ -1,7 +1,7 @@
 import { FaTwitter } from "react-icons/fa"
 import { FiLogOut } from "react-icons/fi"
 import { BsPerson } from "react-icons/bs"
-import { Button, Container, Title } from "./styles"
+import { Button, Container, IconContainer, Title } from "./styles"
 import { Link, useLocation, useHistory } from "react-router-dom"
 import { useGlobalState } from "../../context/GlobalContext"
 const SideBar: React.FC = () => {
@@ -17,7 +17,9 @@ const SideBar: React.FC = () => {
 
     return (
         <Container>
+            <IconContainer>
             <FaTwitter color="#fff" size="25px" />
+            </IconContainer>
             <Link to="/">
             <Button isSelected = {location.pathname === '/'}>
                 <FaTwitter color="#fff" size="25px" />
