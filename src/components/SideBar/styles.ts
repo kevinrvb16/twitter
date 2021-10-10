@@ -3,6 +3,14 @@ import styled from "styled-components"
 interface IProps {
     isSelected?: boolean;
 }
+export const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+
+    a {
+        width: max-content;
+    }
+`
 export const Button = styled.button<IProps>`
     background: none;
     border: none;
@@ -13,7 +21,6 @@ export const Button = styled.button<IProps>`
     align-items:center;
     background-color: ${props => props.isSelected ?  props.theme.color.blue + '30' : 'none'};
     border-radius:53px;
-
 `
 
 

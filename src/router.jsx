@@ -7,6 +7,7 @@ import ThemeProvider from "./styles/ThemeProvider";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Perfil from "./pages/Perfil";
 const Routes = () => {
   return (
     <GlobalStateProvider>
@@ -19,7 +20,7 @@ const Routes = () => {
               <Home />
             </ProtectedRoute>
             <ProtectedRoute path="/perfil">
-              <Home />
+              <Perfil />
             </ProtectedRoute>
             <Route path="/login">
               <Login />
