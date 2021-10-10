@@ -11,7 +11,7 @@ export const InputContainer = styled.div<IProps>`
     padding: 12px;
     display: flex;
     align-items: center;
-
+    position: relative;
     svg {
         stroke: ${props => props.isOnFocus ? props.theme.color.blue : '#8899A6'}
     }
@@ -28,4 +28,15 @@ export const Input = styled.input`
     &::placeholder{
         color: ${props => props.theme.color.gray};
     }
+`
+
+export const DropDown = styled.div`
+    position: absolute;
+    background-color:#000;
+    left: 0;
+    top: 54px;
+    width: 308px;
+    border: 1px solid #2f3336;
+    border-radius: 8px;
+    padding: 20px;
 `
