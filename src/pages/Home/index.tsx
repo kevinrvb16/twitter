@@ -1,7 +1,7 @@
-import SideBar from "../../components/SideBar";
+import SearchInput from "../../components/SearchInput";
 
 function Home() {    
-  return <SideBar/>
+  return <SearchInput/>
 }
 
 export default Home;
