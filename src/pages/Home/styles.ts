@@ -7,16 +7,16 @@ export const UserName = styled.h1`
     font-size: 15px;
     line-height: 18px;
     border-bottom: 1px solid ${props => props.theme.color.borderColor};
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
 `
 
 export const TweetContainer = styled.div`
     margin-top: 10px;
     display: flex;
     align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
     img { 
         border-radius: 50%;
         width: 40px;
@@ -45,5 +45,5 @@ export const TweetButton = styled.div`
     margin-top: 18px;
     margin-bottom: 10px;
     text-align: right;
-    padding-right: 20px;
+    padding-right: 15px;
 `

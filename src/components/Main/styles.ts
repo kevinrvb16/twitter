@@ -21,6 +21,5 @@ export const FixedContent = styled.div`
 `
 
 export const ScrollableContent = styled.div`
-        padding-left: 20px;
-        padding-right: 20px;
+
 `
