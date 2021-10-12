@@ -7,6 +7,7 @@ import Button from "../../components/Button";
 import { useEffect, useState } from "react";
 import { apiWithAuth } from "../../services/api";
 import { toast } from "react-toastify";
+import Tweet from "../../components/Tweet";
 
 interface ITweet {
   id: string
@@ -79,6 +80,12 @@ function Perfil() {
               <Follow>{profile?.number_of_followers} <span>Seguidores</span></Follow>
             </FollowContainer>
           </TextsContainer>
+
+          {profile.tweets.map(tweet => (
+            <Tweet key={tweet.id} name={profile.name} username={profile.username}>
+              {tweet.content}
+            </Tweet>
+          ))}
         </>
       )}
     </PageWrapper>
