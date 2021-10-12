@@ -27,6 +27,7 @@ const CreateAccountModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
     const validation = validateCreateAccountFields(name, username, email, password)
     if(typeof validation === "string"){
       toast.error(validation)
+      return
     }
 
     setLoading(true)
