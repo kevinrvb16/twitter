@@ -61,7 +61,11 @@ function Perfil() {
         </FixedContentContainer>
       }
     >
-      <EditProfileModal isOpen={isEditProfileModalOpen} setIsOpen={setIsEditProfileModalOpen} />
+      <EditProfileModal
+        isOpen={isEditProfileModalOpen}
+        setIsOpen={setIsEditProfileModalOpen}
+        getProfile={getProfile}
+      />
       {profile && (
         <>
           <ImageContainer>
