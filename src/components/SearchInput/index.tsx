@@ -1,6 +1,6 @@
 import { DropDown, Input, InputContainer, UserContainer, UserNames } from "./styles"
 import { FiSearch } from "react-icons/fi"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 const SearchInput = () => {
 
     interface IUsers {
@@ -15,10 +15,20 @@ const SearchInput = () => {
     ]
     const [isOnFocus, setIsOnFocus] = useState(false)
     const [users, setUsers] = useState<IUsers[]>(mockUsers)
+    const [search, setSearch] = useState('')
+
+    useEffect( () => {
+        const timeout = setTimeout(() => console.log('chama o backend!'), 800)
+
+        return () => clearTimeout(timeout)
+    }, [search])
     return (
         <InputContainer isOnFocus={isOnFocus}>
             <FiSearch size="17px" />
-            <Input placeholder="Buscar no Twitter"
+            <Input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Buscar no Twitter"
                 onFocus={() => setIsOnFocus(true)}
                 onBlur={() => setIsOnFocus(false)} />
             {users && (
