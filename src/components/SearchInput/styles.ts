@@ -12,6 +12,8 @@ export const InputContainer = styled.div<IProps>`
     display: flex;
     align-items: center;
     position: relative;
+    height: max-content;
+    margin-top: 12px;
     svg {
         stroke: ${props => props.isOnFocus ? props.theme.color.blue : '#8899A6'}
     }
