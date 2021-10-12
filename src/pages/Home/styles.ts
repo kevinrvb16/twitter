@@ -7,8 +7,6 @@ export const UserName = styled.h1`
     font-size: 15px;
     line-height: 18px;
     border-bottom: 1px solid ${props => props.theme.color.borderColor};
-    margin-left: -20%;
-    margin-right: -20%;
     padding-left: 20px;
     padding-right: 20px;
 `
@@ -17,6 +15,8 @@ export const TweetContainer = styled.div`
     margin-top: 10px;
     display: flex;
     align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
     img { 
         border-radius: 50%;
         width: 40px;
@@ -45,4 +45,5 @@ export const TweetButton = styled.div`
     margin-top: 18px;
     margin-bottom: 10px;
     text-align: right;
+    padding-right: 20px;
 `

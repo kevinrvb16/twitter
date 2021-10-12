@@ -18,8 +18,6 @@ export const FixedContent = styled.div`
     top: 0;
     background-color: #000;
     border-bottom: 1px solid  ${props => props.theme.color.borderColor};
-    padding-left: 20px;
-    padding-right: 20px;
 `
 
 export const ScrollableContent = styled.div`
