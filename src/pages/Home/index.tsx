@@ -1,19 +1,20 @@
 import Button from "../../components/Button";
 import PageWrapper from "../../components/PageWrapper";
-import { useGlobalState } from "../../context/GlobalContext";
+import Tweet from "../../components/Tweet";
+import { IAuth, useGlobalState } from "../../context/GlobalContext";
 import { TweetButton, TweetContainer, TweetInput, UserName } from "./styles";
 
 function Home() {
+  const { auth: {user} } = useGlobalState() as { auth: IAuth }
 
-  const { auth } = useGlobalState()
   return (
     <PageWrapper fixedContent={
       <>
-        <UserName>{auth?.user.name}</UserName>
+        <UserName>{user.name}</UserName>
         <TweetContainer>
           <img
-            src={`https://robohash.org/${auth?.user.username}`}
-            alt={auth?.user.name}
+            src={`https://robohash.org/${user.username}`}
+            alt={user.name}
           />
           <TweetInput placeholder="O que está acontecendo" />
         </TweetContainer>
@@ -22,39 +23,36 @@ function Home() {
         </TweetButton>
       </>
     }>
-      <h1>Meu primeiro tweet!</h1>
-      <h1>Meu segundo tweet!</h1>
-      <h1>Meu terceiro tweet!</h1>
-      <div style={{ paddingTop: "50px", paddingBottom: "50px" }}></div>
-      <h1>Meu primeiro tweet!</h1>
-      <h1>Meu segundo tweet!</h1>
-      <h1>Meu terceiro tweet!</h1>
-      <div style={{ paddingTop: "50px", paddingBottom: "50px" }}></div>
-      <h1>Meu primeiro tweet!</h1>
-      <h1>Meu segundo tweet!</h1>
-      <h1>Meu terceiro tweet!</h1>
-      <div style={{ paddingTop: "50px", paddingBottom: "50px" }}></div>
-      <h1>Meu primeiro tweet!</h1>
-      <h1>Meu segundo tweet!</h1>
-      <h1>Meu terceiro tweet!</h1>
-      <div style={{ paddingTop: "50px", paddingBottom: "50px" }}></div>
-      <h1>Meu primeiro tweet!</h1>
-      <h1>Meu segundo tweet!</h1>
-      <h1>Meu terceiro tweet!</h1>
-      <div style={{ paddingTop: "50px", paddingBottom: "50px" }}></div>
-      <h1>Meu primeiro tweet!</h1>
-      <h1>Meu segundo tweet!</h1>
-      <h1>Meu terceiro tweet!</h1>
-      <div style={{ paddingTop: "50px", paddingBottom: "50px" }}></div>
-      <h1>Meu primeiro tweet!</h1>
-      <h1>Meu segundo tweet!</h1>
-      <h1>Meu terceiro tweet!</h1>
-      <div style={{ paddingTop: "50px", paddingBottom: "50px" }}></div>
-      <h1>Meu primeiro tweet!</h1>
-      <h1>Meu segundo tweet!</h1>
-      <h1>Meu terceiro tweet!</h1>
-      <div style={{ paddingTop: "50px", paddingBottom: "50px" }}></div>
-
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum obcaecati, reprehenderit rem optio adipisci soluta autem. Consequatur cum, facere esse inventore laboriosam saepe dignissimos iste dolor architecto error aut officiis!
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum obcaecati, reprehenderit rem optio adipisci soluta autem. Consequatur cum, facere esse inventore laboriosam saepe dignissimos iste dolor architecto error aut officiis!
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum obcaecati, reprehenderit rem optio adipisci soluta autem. Consequatur cum, facere esse inventore laboriosam saepe dignissimos iste dolor architecto error aut officiis!
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum obcaecati, reprehenderit rem optio adipisci soluta autem. Consequatur cum, facere esse inventore laboriosam saepe dignissimos iste dolor architecto error aut officiis!
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum obcaecati, reprehenderit rem optio adipisci soluta autem. Consequatur cum, facere esse inventore laboriosam saepe dignissimos iste dolor architecto error aut officiis!
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum obcaecati, reprehenderit rem optio adipisci soluta autem. Consequatur cum, facere esse inventore laboriosam saepe dignissimos iste dolor architecto error aut officiis!
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum obcaecati, reprehenderit rem optio adipisci soluta autem. Consequatur cum, facere esse inventore laboriosam saepe dignissimos iste dolor architecto error aut officiis!
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum obcaecati, reprehenderit rem optio adipisci soluta autem. Consequatur cum, facere esse inventore laboriosam saepe dignissimos iste dolor architecto error aut officiis!
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum obcaecati, reprehenderit rem optio adipisci soluta autem. Consequatur cum, facere esse inventore laboriosam saepe dignissimos iste dolor architecto error aut officiis!
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum obcaecati, reprehenderit rem optio adipisci soluta autem. Consequatur cum, facere esse inventore laboriosam saepe dignissimos iste dolor architecto error aut officiis!
+      </Tweet>
     </PageWrapper>
   )
 }
