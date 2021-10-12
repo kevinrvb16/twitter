@@ -40,7 +40,7 @@ const CreateAccountModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
       toast.success("Conta criada com sucesso!")
       onClose()
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Não foi possível criar a conta!")
+      toast.error(error?.response?.data?.message.join('. ') || "Não foi possível criar a conta!")
     }
     setLoading(false)
   };

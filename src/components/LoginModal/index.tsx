@@ -42,7 +42,7 @@ const LoginModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
 
     } catch (error) {
       toast.error(
-        error?.response?.data?.message || "Não foi possível efetuar login!"
+        error?.response?.data?.message.join('. ') || "Não foi possível efetuar login!"
       )
     }
     setLoading(false)
