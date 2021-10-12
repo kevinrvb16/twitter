@@ -66,7 +66,7 @@ function Perfil() {
         <>
           <ImageContainer>
             <img src={`https://robohash.org/${profile?.username}`} alt={profile?.name} />
-            <Button height="33px" onClick={() => setIsEditProfileModalOpen(true)}>Editar perfil</Button>
+            <Button style={{backgroundColor: '#000', color: '#fff', border: `1px solid #fff` }} height="33px" onClick={() => setIsEditProfileModalOpen(true)}>Editar perfil</Button>
           </ImageContainer>
           <TextsContainer>
             <Name>{profile?.name}</Name>
