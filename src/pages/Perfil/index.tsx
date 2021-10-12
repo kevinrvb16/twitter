@@ -28,7 +28,7 @@ interface IProfile {
 }
 function Perfil() {
 
-  const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState( false )
+  const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false)
   const [profile, setProfile] = useState<IProfile>()
 
   const getProfile = async () => {
@@ -36,12 +36,12 @@ function Perfil() {
       const { data } = await apiWithAuth.get('/profile')
 
       setProfile(data)
-    } catch (error) { 
-      console.log({error})
+    } catch (error) {
+      console.log({ error })
       toast.error(
         error?.response?.data?.message.join('. ') || 'Erro ao carregar o perfil'
       )
-     }
+    }
   }
   useEffect(() => {
     getProfile()
