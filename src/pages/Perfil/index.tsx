@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { apiWithAuth } from "../../services/api";
 import { toast } from "react-toastify";
 import Tweet from "../../components/Tweet";
+import EditProfileModal from "../../components/EditProfileModal";
 
 interface ITweet {
   id: string
@@ -27,6 +28,7 @@ interface IProfile {
 }
 function Perfil() {
 
+  const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState( false )
   const [profile, setProfile] = useState<IProfile>()
 
   const getProfile = async () => {
@@ -59,11 +61,12 @@ function Perfil() {
         </FixedContentContainer>
       }
     >
+      <EditProfileModal isOpen={isEditProfileModalOpen} setIsOpen={setIsEditProfileModalOpen} />
       {profile && (
         <>
           <ImageContainer>
             <img src={`https://robohash.org/${profile?.username}`} alt={profile?.name} />
-            <Button>Editar perfil</Button>
+            <Button height="33px" onClick={() => setIsEditProfileModalOpen(true)}>Editar perfil</Button>
           </ImageContainer>
           <TextsContainer>
             <Name>{profile?.name}</Name>
