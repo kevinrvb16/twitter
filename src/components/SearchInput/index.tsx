@@ -28,13 +28,18 @@ const SearchInput = () => {
         <InputContainer isOnFocus={isOnFocus}>
             <FiSearch size="17px" />
             <Input
+                id="search-users-input"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Buscar no Twitter"
                 onFocus={() => setIsOnFocus(true)}
-                onBlur={() => setIsOnFocus(false)} />
+            />
             {users &&  isOnFocus  && (
-            <DropDown>
+            <DropDown
+                onMouseLeave={ () => {setIsOnFocus(false)
+                    document.getElementById('search-users-input')?.blur()
+                } }
+            >
                 {users?.map((user, index)=> (
                 <UserContainer key={index}>
                     <img src={`https://robohash.org/${user.username}`} alt={user.name} /> 
