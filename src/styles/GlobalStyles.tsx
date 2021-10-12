@@ -27,6 +27,19 @@ time, mark, audio, video {
 
 html {
     background-color: #000;
+        &::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #ffffff50;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #202327;
+        border-radius: 10px;
+    }
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 

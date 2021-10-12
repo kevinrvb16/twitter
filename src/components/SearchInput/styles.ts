@@ -39,6 +39,22 @@ export const DropDown = styled.div`
     border: 1px solid #2f3336;
     border-radius: 8px;
     padding: 20px;
+    max-height: 575px;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+    &::-webkit-scrollbar-track {
+        background: #ffffff50;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #202327;
+        border-radius: 10px;
+    }
 `
 export const UserNames = styled.div`
     margin-left: 10px;
