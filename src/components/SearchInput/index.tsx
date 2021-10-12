@@ -1,6 +1,7 @@
 import { DropDown, Input, InputContainer, UserContainer, UserNames } from "./styles"
 import { FiSearch } from "react-icons/fi"
 import { useEffect, useState } from "react"
+import { apiWithAuth } from "../../services/api"
 const SearchInput = () => {
 
     interface IUsers {
@@ -8,19 +9,20 @@ const SearchInput = () => {
         username: string;
     }
 
-    const mockUsers = [
-        { name: 'daniel berg', username: 'daniel11' },
-        { name: 'Bruno Braga', username: 'bruno11' },
-        { name: 'Luã Alvaro', username: 'lulu' }
-    ]
     const [isOnFocus, setIsOnFocus] = useState(false)
-    const [users, setUsers] = useState<IUsers[]>(mockUsers)
+    const [users, setUsers] = useState<IUsers[]>()
     const [search, setSearch] = useState('')
+    const searchUsers = async () => {
+        const {data} = await apiWithAuth.get(`/users?search=${search}`)
+
+        setUsers(data)
+    }
 
     useEffect( () => {
-        const timeout = setTimeout(() => console.log('chama o backend!'), 800)
+        const timeout = setTimeout(searchUsers, 800)
 
         return () => clearTimeout(timeout)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search])
     return (
         <InputContainer isOnFocus={isOnFocus}>
@@ -31,7 +33,7 @@ const SearchInput = () => {
                 placeholder="Buscar no Twitter"
                 onFocus={() => setIsOnFocus(true)}
                 onBlur={() => setIsOnFocus(false)} />
-            {users && (
+            {users &&  isOnFocus  && (
             <DropDown>
                 {users?.map((user, index)=> (
                 <UserContainer key={index}>
