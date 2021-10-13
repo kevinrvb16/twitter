@@ -31,6 +31,7 @@ export const ImageContainer = styled.div`
     justify-content: space-between;
     padding-left: 20px;
     padding-right: 20px;
+    margin-top: 24px;
 
     img {
         border-radius: 50%;
