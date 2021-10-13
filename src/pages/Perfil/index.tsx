@@ -37,6 +37,7 @@ function Perfil() {
 
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false)
   const [profile, setProfile] = useState<IProfile>()
+  const [loading, setLoading] = useState(false)
 
   const { username } = useParams<IParams>()
   const {
@@ -58,7 +59,40 @@ function Perfil() {
         error?.response?.data?.message.join('. ') || 'Erro ao carregar o perfil'
       )
     }
+    setLoading(false)
   }
+  const follow = async (follow_user_id: string) => {
+    setLoading(true)
+    try{
+      await apiWithAuth.post('/follows', {
+        follow_user_id
+      })
+      getProfile()
+    } catch (error) {
+      console.log({ error })
+      toast.error(
+        error?.response?.data?.message?.join('. ') || 'Erro ao dar follow'
+      )
+    }
+  }
+
+  const unfollow = async (follow_user_id: string) => {
+    setLoading(true)
+    try{
+      await apiWithAuth.delete('/follows', { 
+        data: {
+          follow_user_id
+        }
+      })
+      getProfile()
+    } catch (error) {
+      console.log({ error })
+      toast.error(
+        error?.response?.data?.message?.join('. ') || 'Erro ao dar unfollow'
+      )
+    }
+  }
+
   useEffect(() => {
     getProfile()
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -96,10 +130,25 @@ function Perfil() {
               Editar perfil
             </Button>
             ): (
-              <Button
-                style={{ backgroundColor: '#000', color: '#fff', border: `1px solid #fff`}}         
-              >
-                {profile.isFollowing ? "Seguindo": 'Seguir'}</Button>
+              profile.isFollowing ? (
+                <Button
+                  style={{ backgroundColor: '#000', color: '#fff', border: `1px solid #fff`}}
+                  onClick={() => unfollow(profile.id)}
+                  height="33px"
+                  isDisabled={loading}
+                >
+                  Seguindo
+                </Button>
+              ) : (
+                <Button
+                  style={{ backgroundColor: '#fff', color: '#000'}}
+                  onClick={() => follow(profile.id)}
+                  height="33px"
+                  isDisabled={loading}
+                >
+                  Seguir
+                </Button>
+              )
             )}
           </ImageContainer>
           <TextsContainer>
