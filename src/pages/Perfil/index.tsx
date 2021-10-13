@@ -31,6 +31,7 @@ interface IProfile {
   number_of_followers: number
   number_of_follows: number
   tweets: ITweet[]
+  isFollowing?: boolean
 }
 function Perfil() {
 
@@ -44,12 +45,11 @@ function Perfil() {
 
   const isMyProfile = !username || username === user.username
 
-  console.log(isMyProfile)
-  console.log({username})
-
   const getProfile = async () => {
     try {
-      const { data } = await apiWithAuth.get('/profile')
+      const { data } = await apiWithAuth.get(
+        isMyProfile?'/profile' : `/users/${username}`
+      )
 
       setProfile(data)
     } catch (error) {
@@ -61,6 +61,7 @@ function Perfil() {
   }
   useEffect(() => {
     getProfile()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -86,7 +87,20 @@ function Perfil() {
         <>
           <ImageContainer>
             <img src={`https://robohash.org/${profile?.username}`} alt={profile?.name} />
-            <Button style={{backgroundColor: '#000', color: '#fff', border: `1px solid #fff` }} height="33px" onClick={() => setIsEditProfileModalOpen(true)}>Editar perfil</Button>
+            {isMyProfile? (
+              <Button
+              style={{backgroundColor: '#000', color: '#fff', border: `1px solid #fff` }}
+              height="33px"
+              onClick={() => setIsEditProfileModalOpen(true)}
+            >
+              Editar perfil
+            </Button>
+            ): (
+              <Button
+                style={{ backgroundColor: '#000', color: '#fff', border: `1px solid #fff`}}         
+              >
+                {profile.isFollowing ? "Seguindo": 'Seguir'}</Button>
+            )}
           </ImageContainer>
           <TextsContainer>
             <Name>{profile?.name}</Name>
