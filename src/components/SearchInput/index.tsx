@@ -2,6 +2,7 @@ import { DropDown, Input, InputContainer, UserContainer, UserNames } from "./sty
 import { FiSearch } from "react-icons/fi"
 import { useEffect, useState } from "react"
 import { apiWithAuth } from "../../services/api"
+import { Link } from "react-router-dom"
 const SearchInput = () => {
 
     interface IUsers {
@@ -13,16 +14,16 @@ const SearchInput = () => {
     const [users, setUsers] = useState<IUsers[]>()
     const [search, setSearch] = useState('')
     const searchUsers = async () => {
-        const {data} = await apiWithAuth.get(`/users?search=${search}`)
+        const { data } = await apiWithAuth.get(`/users?search=${search}`)
 
         setUsers(data)
     }
 
-    useEffect( () => {
+    useEffect(() => {
         const timeout = setTimeout(searchUsers, 800)
 
         return () => clearTimeout(timeout)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search])
     return (
         <InputContainer isOnFocus={isOnFocus}>
@@ -34,23 +35,26 @@ const SearchInput = () => {
                 placeholder="Buscar no Twitter"
                 onFocus={() => setIsOnFocus(true)}
             />
-            {users &&  isOnFocus  && (
-            <DropDown
-                onMouseLeave={ () => {setIsOnFocus(false)
-                    document.getElementById('search-users-input')?.blur()
-                } }
-            >
-                {users?.map((user, index)=> (
-                <UserContainer key={index}>
-                    <img src={`https://robohash.org/${user.username}`} alt={user.name} /> 
-                    <UserNames>
-                        <h1>{user.name}</h1>
-                        <h2>@{user.username}</h2>
-                    </UserNames>
-                </UserContainer>
-    ))
-}
-            </DropDown >
+            {users && isOnFocus && (
+                <DropDown
+                    onMouseLeave={() => {
+                        setIsOnFocus(false)
+                        document.getElementById('search-users-input')?.blur()
+                    }}
+                >
+                    {users?.map((user, index) => (
+                        <Link key={index} to={`/perfil/${user.username}`}>
+                            <UserContainer>
+                                <img src={`https://robohash.org/${user.username}`} alt={user.name} />
+                                <UserNames>
+                                    <h1>{user.name}</h1>
+                                    <h2>@{user.username}</h2>
+                                </UserNames>
+                            </UserContainer>
+                        </Link>
+                    ))
+                    }
+                </DropDown >
             )}
         </InputContainer >
     )
