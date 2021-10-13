@@ -41,15 +41,15 @@ function Perfil() {
 
   const { username } = useParams<IParams>()
   const {
-    auth:{user},
-  } = useGlobalState() as {auth: IAuth}
+    auth: { user },
+  } = useGlobalState() as { auth: IAuth }
 
   const isMyProfile = !username || username === user.username
 
   const getProfile = async () => {
     try {
       const { data } = await apiWithAuth.get(
-        isMyProfile?'/profile' : `/users/${username}`
+        isMyProfile ? '/profile' : `/users/${username}`
       )
 
       setProfile(data)
@@ -63,7 +63,7 @@ function Perfil() {
   }
   const follow = async (follow_user_id: string) => {
     setLoading(true)
-    try{
+    try {
       await apiWithAuth.post('/follows', {
         follow_user_id
       })
@@ -78,8 +78,8 @@ function Perfil() {
 
   const unfollow = async (follow_user_id: string) => {
     setLoading(true)
-    try{
-      await apiWithAuth.delete('/follows', { 
+    try {
+      await apiWithAuth.delete('/follows', {
         data: {
           follow_user_id
         }
@@ -95,7 +95,7 @@ function Perfil() {
 
   useEffect(() => {
     getProfile()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username])
 
   return (
@@ -121,18 +121,18 @@ function Perfil() {
         <>
           <ImageContainer>
             <img src={`https://robohash.org/${profile?.username}`} alt={profile?.name} />
-            {isMyProfile? (
+            {isMyProfile ? (
               <Button
-              style={{backgroundColor: '#000', color: '#fff', border: `1px solid #fff` }}
-              height="33px"
-              onClick={() => setIsEditProfileModalOpen(true)}
-            >
-              Editar perfil
-            </Button>
-            ): (
+                style={{ backgroundColor: '#000', color: '#fff', border: `1px solid #fff` }}
+                height="33px"
+                onClick={() => setIsEditProfileModalOpen(true)}
+              >
+                Editar perfil
+              </Button>
+            ) : (
               profile.isFollowing ? (
                 <Button
-                  style={{ backgroundColor: '#000', color: '#fff', border: `1px solid #fff`}}
+                  style={{ backgroundColor: '#000', color: '#fff', border: `1px solid #fff` }}
                   onClick={() => unfollow(profile.id)}
                   height="33px"
                   isDisabled={loading}
@@ -141,7 +141,7 @@ function Perfil() {
                 </Button>
               ) : (
                 <Button
-                  style={{ backgroundColor: '#fff', color: '#000'}}
+                  style={{ backgroundColor: '#fff', color: '#000' }}
                   onClick={() => follow(profile.id)}
                   height="33px"
                   isDisabled={loading}
@@ -161,10 +161,12 @@ function Perfil() {
               <FaRegCalendarAlt color="#778691" size="20px" />
               <CreatedAt>Ingressou em {new Date(profile?.created_at).toLocaleDateString('pt-BR', { month: "long" })} de {new Date(profile.created_at).getFullYear()}</CreatedAt>
             </CreatedAtContainer>
-            <FollowContainer>
-              <Follow>{profile?.number_of_follows} <span>Seguindo</span></Follow>
-              <Follow>{profile?.number_of_followers} <span>Seguidores</span></Follow>
-            </FollowContainer>
+            <Link to="/perfil/seguidores">
+              <FollowContainer>
+                <Follow>{profile?.number_of_follows} <span>Seguindo</span></Follow>
+                <Follow>{profile?.number_of_followers} <span>Seguidores</span></Follow>
+              </FollowContainer>
+            </Link>
           </TextsContainer>
 
           {profile.tweets.map(tweet => (
@@ -173,8 +175,9 @@ function Perfil() {
             </Tweet>
           ))}
         </>
-      )}
-    </PageWrapper>
+      )
+      }
+    </PageWrapper >
   )
 }
 

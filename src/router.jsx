@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Perfil from "./pages/Perfil";
+import Seguidores from "./pages/Seguidores";
 const Routes = () => {
   return (
     <GlobalStateProvider>
@@ -21,6 +22,9 @@ const Routes = () => {
             </ProtectedRoute>
             <ProtectedRoute exact path="/perfil">
               <Perfil />
+            </ProtectedRoute>
+            <ProtectedRoute exact path="/perfil/seguidores">
+              <Seguidores />
             </ProtectedRoute>
             <ProtectedRoute path="/perfil/:username">
               <Perfil />
