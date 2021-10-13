@@ -2,18 +2,24 @@ import PageWrapper from "../../components/PageWrapper";
 import { Bio, CreatedAt, CreatedAtContainer, FixedContentContainer, FixedContentTexts, Follow, FollowContainer, ImageContainer, Name, TextsContainer, UserName } from "./styles";
 import { BiArrowBack } from 'react-icons/bi'
 import { FaRegCalendarAlt } from 'react-icons/fa'
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Button from "../../components/Button";
 import { useEffect, useState } from "react";
 import { apiWithAuth } from "../../services/api";
 import { toast } from "react-toastify";
 import Tweet from "../../components/Tweet";
 import EditProfileModal from "../../components/EditProfileModal";
+import { IAuth, useGlobalState } from "../../context/GlobalContext";
+
+interface IParams {
+  username: string
+}
 
 interface ITweet {
   id: string
   content: string
 }
+
 interface IProfile {
   id: string
   name: string
@@ -30,6 +36,16 @@ function Perfil() {
 
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false)
   const [profile, setProfile] = useState<IProfile>()
+
+  const { username } = useParams<IParams>()
+  const {
+    auth:{user},
+  } = useGlobalState() as {auth: IAuth}
+
+  const isMyProfile = !username || username === user.username
+
+  console.log(isMyProfile)
+  console.log({username})
 
   const getProfile = async () => {
     try {
