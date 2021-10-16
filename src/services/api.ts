@@ -1,11 +1,11 @@
 import axios from "axios";
 import {IAuth} from '../context/GlobalContext'
 export const api = axios.create({
-    baseURL: "https://maratonas-academy-twitter.herokuapp.com/"
+    baseURL: process.env.REACT_APP_API_URL,
 })
 
 export const apiWithAuth = axios.create({
-    baseURL: "https://maratonas-academy-twitter.herokuapp.com/"
+    baseURL: process.env.REACT_APP_API_URL,
 })
 
 apiWithAuth.interceptors.request.use(function (config) {
