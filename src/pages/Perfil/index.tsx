@@ -2,7 +2,7 @@ import PageWrapper from "../../components/PageWrapper";
 import { Bio, CreatedAt, CreatedAtContainer, FixedContentContainer, FixedContentTexts, Follow, FollowContainer, ImageContainer, Name, TextsContainer, UserName } from "./styles";
 import { BiArrowBack } from 'react-icons/bi'
 import { FaRegCalendarAlt } from 'react-icons/fa'
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import Button from "../../components/Button";
 import { useEffect, useState } from "react";
 import { apiWithAuth } from "../../services/api";
@@ -39,6 +39,7 @@ function Perfil() {
   const [profile, setProfile] = useState<IProfile>()
   const [loading, setLoading] = useState(false)
 
+  const history = useHistory()
   const { username } = useParams<IParams>()
   const {
     auth: { user },
@@ -102,9 +103,7 @@ function Perfil() {
     <PageWrapper
       fixedContent={
         <FixedContentContainer>
-          <Link to='/'>
-            <BiArrowBack size='15px' />
-          </Link>
+            <BiArrowBack size='15px'  onClick={() => history.goBack()}/>
           <FixedContentTexts>
             <h1>{profile?.name}</h1>
             <h2> {profile?.tweets.length} Tweets</h2>
