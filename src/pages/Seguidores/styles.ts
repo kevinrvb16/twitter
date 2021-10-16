@@ -9,6 +9,10 @@ export const FixedContentContainer = styled.div`
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 21px;
+
+    svg {
+        cursor: pointer;
+    }
 `
 
 export const FixedContentTexts = styled.div`
