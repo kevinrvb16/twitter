@@ -1,7 +1,10 @@
+import { useEffect, useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import PageWrapper from "../../components/PageWrapper";
 import { IAuth, useGlobalState } from "../../context/GlobalContext";
+import { apiWithAuth } from "../../services/api";
 import {
     FixedContentTexts,
     FixedContentContainer,
@@ -11,10 +14,39 @@ import {
     UserText,
 } from "./styles";
 
+interface IUser {
+    id: string
+    name: string
+    bio: string | null
+    username: string
+}
+
+interface IFollows {
+    follows: IUser[]
+    followers: IUser[]
+}
+
 const Seguidores = () => {
+
+    const [data, setData] = useState<IFollows>()
+    const [showFollowers, setShowFollowers] = useState(true)
     const {
         auth: { user },
     } = useGlobalState() as { auth: IAuth };
+
+    const getFollows = async () => {
+        try {
+            const { data } = await apiWithAuth.get('/profile/follows')
+            setData(data)
+        } catch (error) {
+            console.log(error)
+            toast.error(error?.response?.data?.message?.join('. ') || 'Erro ao carregar seguidores')
+        }
+    }
+
+    useEffect(() => {
+        getFollows()
+    }, [])
     return (
         <PageWrapper
             fixedContent={
@@ -28,34 +60,39 @@ const Seguidores = () => {
                         </FixedContentTexts>
                     </FixedContentContainer>
                     <FollowContainer>
-                        <FollowTitle isActive={true}>Seguidores</FollowTitle>
-                        <FollowTitle isActive={false}>Seguindo</FollowTitle>
+                        <FollowTitle isActive={showFollowers} onClick={() => setShowFollowers(true)} >Seguidores</FollowTitle>
+                        <FollowTitle isActive={!showFollowers} onClick={() => setShowFollowers(false)} >Seguindo</FollowTitle>
                     </FollowContainer>
                 </>
             }
         >
-            <Link to={`/perfil/${user.username}`}>
-                <UserContainer>
-                    <img src={`https://robohash.org/${user.username}`} alt={user.name} />
-                    <UserText>
-
-                        <h1>{user.name}</h1>
-                        <h2>@{user.username}</h2>
-                        <p>CTO | Maratonas</p>
-                    </UserText>
-                </UserContainer>
-            </Link>
-            <Link to={`/perfil/${user.username}`}>
-                <UserContainer>
-                    <img src={`https://robohash.org/${user.username}`} alt={user.name} />
-                    <UserText>
-
-                        <h1>{user.name}</h1>
-                        <h2>@{user.username}</h2>
-                        <p>CTO | Maratonas</p>
-                    </UserText>
-                </UserContainer>
-            </Link>
+            {showFollowers? (
+                data?.followers.map(follower => (
+                    <Link to={`/perfil/${follower.username}`} key={follower.id}>
+                        <UserContainer>
+                            <img src={`https://robohash.org/${follower.username}`} alt={follower.name} />
+                            <UserText>
+                                <h1>{follower.name}</h1>
+                                <h2>@{follower.username}</h2>
+                                <p>{follower.bio}</p>
+                            </UserText>
+                        </UserContainer>
+                    </Link>
+                ))
+            ): (
+                data?.follows.map(follow => (
+                    <Link to={`/perfil/${follow.username}`} key={follow.id}>
+                        <UserContainer>
+                            <img src={`https://robohash.org/${follow.username}`} alt={follow.name} />
+                            <UserText>
+                                <h1>{follow.name}</h1>
+                                <h2>@{follow.username}</h2>
+                                <p>{follow.bio}</p>
+                            </UserText>
+                        </UserContainer>
+                    </Link>
+                ))
+            )}
         </PageWrapper>
     );
 };
