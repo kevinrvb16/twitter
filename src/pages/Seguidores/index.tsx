@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import PageWrapper from "../../components/PageWrapper";
 import { IAuth, useGlobalState } from "../../context/GlobalContext";
@@ -14,6 +15,10 @@ import {
     UserText,
 } from "./styles";
 
+interface IParams {
+    username: string
+}
+
 interface IUser {
     id: string
     name: string
@@ -22,6 +27,7 @@ interface IUser {
 }
 
 interface IFollows {
+    name: string
     follows: IUser[]
     followers: IUser[]
 }
@@ -30,13 +36,19 @@ const Seguidores = () => {
 
     const [data, setData] = useState<IFollows>()
     const [showFollowers, setShowFollowers] = useState(true)
+    const { username } = useParams<IParams>()
+
+    const isMyFollowsPage = !username
+
+    console.log(username)
+
     const {
         auth: { user },
     } = useGlobalState() as { auth: IAuth };
 
     const getFollows = async () => {
         try {
-            const { data } = await apiWithAuth.get('/profile/follows')
+            const { data } = await apiWithAuth.get(isMyFollowsPage? '/profile/follows' : `/users/${username}/follows`)
             setData(data)
         } catch (error) {
             console.log(error)
@@ -46,7 +58,7 @@ const Seguidores = () => {
 
     useEffect(() => {
         getFollows()
-    }, [])
+    }, [username])
     return (
         <PageWrapper
             fixedContent={
@@ -56,7 +68,7 @@ const Seguidores = () => {
                             <BiArrowBack size="15px" />
                         </Link>
                         <FixedContentTexts>
-                            <h1>{user.name}</h1>
+                            <h1>{isMyFollowsPage? user.name : data?.name}</h1>
                         </FixedContentTexts>
                     </FixedContentContainer>
                     <FollowContainer>
