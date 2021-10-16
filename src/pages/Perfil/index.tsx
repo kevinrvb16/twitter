@@ -161,7 +161,8 @@ function Perfil() {
               <FaRegCalendarAlt color="#778691" size="20px" />
               <CreatedAt>Ingressou em {new Date(profile?.created_at).toLocaleDateString('pt-BR', { month: "long" })} de {new Date(profile.created_at).getFullYear()}</CreatedAt>
             </CreatedAtContainer>
-            <Link to="/perfil/seguidores">
+
+            <Link to={isMyProfile ? "/perfil/seguidores" : `/perfil/${profile.username}/seguidores`}>
               <FollowContainer>
                 <Follow>{profile?.number_of_follows} <span>Seguindo</span></Follow>
                 <Follow>{profile?.number_of_followers} <span>Seguidores</span></Follow>
